@@ -24,13 +24,21 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class ProviderApplication {
 
   public static void main(String[] args) throws Exception {
+    // xml
+//    ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring/dubbo-provider.xml");
+//    context.start();
+
+//     java configuration
     AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
         ProviderConfiguration.class);
     context.start();
+
+    System.out.println("started");
     System.in.read();
   }
 

@@ -22,6 +22,8 @@ public interface DemoService {
 
   String sayHello(String name);
 
+  String timeout(String name) throws InterruptedException;
+
   default CompletableFuture<String> sayHelloAsync(String name) {
     return CompletableFuture.completedFuture(sayHello(name));
   }
