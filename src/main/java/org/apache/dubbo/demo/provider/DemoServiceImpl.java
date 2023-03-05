@@ -34,6 +34,11 @@ public class DemoServiceImpl implements DemoService {
 
   @Override
   public String sayHello(String name) {
+    try {
+      TimeUnit.MILLISECONDS.sleep(500);
+    } catch (InterruptedException e) {
+      throw new RuntimeException(e);
+    }
     logger.info(
         "Hello " + name + ", request from consumer: " + RpcContext.getContext().getRemoteAddress());
     return "Hello " + name + ", response from provider: " + RpcContext.getContext()
