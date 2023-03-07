@@ -14,9 +14,9 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
 
-    <curator.version>5.2.1</curator.version>
-    <log4j2.version>2.11.1</log4j2.version>
-    <dubbo.version>2.7.8</dubbo.version>
+    <curator.version>5.4.0</curator.version>
+    <log4j2.version>2.20.0</log4j2.version>
+    <dubbo.version>3.2.0-beta.5</dubbo.version>
   </properties>
 
   <dependencies>
@@ -26,17 +26,17 @@
       <artifactId>dubbo</artifactId>
       <version>${dubbo.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.apache.dubbo</groupId>
+      <artifactId>dubbo-registry-nacos</artifactId>
+      <version>${dubbo.version}</version>
+    </dependency>
 <!--    <dependency>-->
 <!--      <groupId>org.apache.dubbo</groupId>-->
 <!--      <artifactId>dubbo-serialization-kryo</artifactId>-->
 <!--      <version>${dubbo.version}</version>-->
 <!--    </dependency>-->
-<!--    &lt;!&ndash; Dubbo Nacos registry dependency &ndash;&gt;-->
-<!--    <dependency>-->
-<!--      <groupId>com.alibaba</groupId>-->
-<!--      <artifactId>dubbo-registry-nacos</artifactId>-->
-<!--      <version>${dubbo.version}</version>-->
-<!--    </dependency>-->
+
     <!-- https://mvnrepository.com/artifact/com.esotericsoftware/kryo -->
 <!--    <dependency>-->
 <!--      <groupId>com.esotericsoftware</groupId>-->
@@ -72,6 +72,11 @@
     <dependency>
       <groupId>org.apache.curator</groupId>
       <artifactId>curator-recipes</artifactId>
+      <version>${curator.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.curator</groupId>
+      <artifactId>curator-x-discovery</artifactId>
       <version>${curator.version}</version>
     </dependency>
 
