@@ -16,16 +16,16 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package async;
+package sync;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class ProviderAsyncXmlApplication {
+public class ProviderXmlApplication {
 
   public static void main(String[] args) throws Exception {
     // xml
     ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
-        "async/async-provider.xml");
+            "sync/provider.xml");
     context.start();
 
     System.out.println("provider started");

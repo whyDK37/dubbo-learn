@@ -14,35 +14,42 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package async;
+package sync;
 
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+
 import org.apache.dubbo.demo.DemoService;
 import org.apache.dubbo.rpc.RpcContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class ConsumerAsyncXmlApplication {
+public class ConsumerXmlApplication {
 
-  /**
-   * In order to make sure multicast registry works, need to specify '-Djava.net.preferIPv4Stack=true'
-   * before launch the application
-   */
-  public static void main(String[] args)
-      throws InterruptedException, ExecutionException, IOException {
-    ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
-        "async/async-consumer.xml");
-    context.start();
-    System.out.println("consumer started");
+    /**
+     * In order to make sure multicast registry works, need to specify '-Djava.net.preferIPv4Stack=true'
+     * before launch the application
+     */
+    public static void main(String[] args)
+            throws InterruptedException, ExecutionException, IOException {
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
+                "sync/consumer.xml");
+        context.start();
+        System.out.println("consumer started");
 
-    DemoService service = context.getBean("demoService", DemoService.class);
-    String hello = service.sayHello("world");
-    System.out.println("result :" + hello);
-    Future<String> futureSubtraction = RpcContext.getContext().getFuture();
-    System.out.println("future result :" + futureSubtraction.get());
-    System.in.read();
+        DemoService service = context.getBean("demoService", DemoService.class);
+        for (int i = 0; i < 1000; i++) {
+            System.out.println("hello " + i);
+            try {
+                String hello = service.sayHello("world");
+                System.out.println("result :" + hello);
+            } catch (Exception e) {
+                TimeUnit.SECONDS.sleep(5);
+                throw new RuntimeException(e);
+            }
+        }
 
-  }
+    }
 
 }

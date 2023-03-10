@@ -21,17 +21,19 @@
   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
        http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
 
-  <dubbo:application name="demo-consumer"/>
+  <dubbo:application metadata-type="remote" name="demo-provider"/>
 
-<!--  <dubbo:registry id="registry" address="nacos://127.0.0.1:8848"/>-->
-  <dubbo:registry id="registry" address="zookeeper://127.0.0.1:2181"/>
+  <dubbo:metadata-report address="nacos://10.24.29.7:8848/"/>
+  <dubbo:registry id="registry" address="nacos://10.24.29.7:8848/"/>
+<!--  <dubbo:registry id="registry" address="zookeeper://127.0.0.1:2181"/>-->
 
-  <dubbo:reference registry="registry" id="demoService" check="false" interface="org.apache.dubbo.demo.DemoService"
-    timeout="9999999">
-    <dubbo:method name="timeout" timeout="1000" retries="3" >
-    </dubbo:method>
-    <dubbo:method name="sayHello" timeout="3000" retries="3" async="true" >
-    </dubbo:method>
-  </dubbo:reference>
+  <dubbo:protocol name="dubbo" port="-1"/>
 
+  <bean id="demoService" class="org.apache.dubbo.demo.provider.DemoServiceImpl"/>
+  <bean id="greetingService" class="org.apache.dubbo.demo.provider.GreetingServiceImpl"/>
+
+
+  <dubbo:service interface="org.apache.dubbo.demo.DemoService" ref="demoService" />
+<!--  <dubbo:service version="1.0.0" group="greeting" timeout="5000" interface="org.apache.dubbo.demo.GreetingService"-->
+<!--    ref="greetingService" />-->
 </beans>

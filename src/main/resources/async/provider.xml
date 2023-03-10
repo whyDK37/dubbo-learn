@@ -22,10 +22,10 @@
        http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
 
   <dubbo:application metadata-type="remote" name="demo-provider"/>
-  <dubbo:metadata-report address="zookeeper://127.0.0.1:2181"/>
+<!--  <dubbo:metadata-report address="zookeeper://127.0.0.1:2181"/>-->
 
-<!--  <dubbo:registry id="registry" address="nacos://127.0.0.1:8848"/>-->
-  <dubbo:registry id="registry" address="zookeeper://127.0.0.1:2181"/>
+  <dubbo:registry id="registry" address="nacos://10.24.29.199:8848/"/>
+<!--  <dubbo:registry id="registry" address="zookeeper://127.0.0.1:2181"/>-->
 
   <dubbo:protocol name="dubbo"/>
 
